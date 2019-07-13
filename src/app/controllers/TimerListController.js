@@ -15,7 +15,7 @@ class TimerListController {
 
         const addTimer = await Session.findById(req.params.id);
 
-        req.io.emit("addTimer", addTimer);
+        req.io.emit("addTimer", addTimer.timerList);
 
         return res.json();
     }
@@ -40,7 +40,7 @@ class TimerListController {
 
         const removeTimer = await Session.findById(req.params.id);
 
-        req.io.emit("removeTimer", removeTimer);
+        req.io.emit("removeTimer", removeTimer.timerList);
 
         return res.send();
     }
