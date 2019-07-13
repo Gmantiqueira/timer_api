@@ -6,7 +6,7 @@ class SessionController {
 
         if (await Session.findOne({ sessionName })) {
             const session = await Session.findOne({
-                sessionName: req.params.session
+                sessionName: sessionName
             });
 
             return res.send(session);
