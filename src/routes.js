@@ -3,7 +3,11 @@ const routes = express.Router();
 
 const controllers = require("./app/controllers");
 
-routes.post("/user", controllers.UserController.store);
+routes.post("/user/signup", controllers.UserController.createUser);
+routes.put("/user/nickname", controllers.UserController.setNickname);
+routes.put("/user/gravatar", controllers.UserController.setGravatar);
+routes.delete("/user/:id/delete", controllers.UserController.destroyUser);
+routes.get("/user", controllers.UserController.listUsers);
 
 routes.get("/session", controllers.SessionController.listSessions);
 routes.get("/session/:session", controllers.SessionController.getSession);
@@ -22,5 +26,9 @@ routes.put("/session/:id/pause", controllers.TimerController.pauseTimer);
 routes.put("/session/:id/resume", controllers.TimerController.resumeTimer);
 routes.put("/session/:id/update", controllers.TimerController.updateTimer);
 routes.put("/session/:id/set", controllers.TimerController.setTimer);
+routes.put("/session/:id/stop", controllers.TimerController.stopTimer);
+
+routes.put("/session/:id/color", controllers.StyleController.updateColor);
+routes.put("/session/:id/orientation", controllers.StyleController.updateOrientation);
 
 module.exports = routes;

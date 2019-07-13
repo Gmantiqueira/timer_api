@@ -3,27 +3,21 @@ const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
-        require: true,
-        unique: true,
+        default: 'Guest'
     },
     email: {
         type: String,
+        require: true,
         unique: true,
     },
-    baseColor: {
+    gravatar: {
         type: String,
         require: true,
-        default: '#2463D0'
-    },
-    orientation: {
-        type: String,
-        require: true,
-        default: 'circular',
-        lowercase: true
+        default: ''
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
 })
 
