@@ -37,6 +37,8 @@ class TimerController {
   async setTimer(req, res) {
     const { totalTime } = req.body;
 
+    moment.locale('pt-BR')
+
     var endline = moment(moment().add(totalTime, 'm'))
 
     await Session.findByIdAndUpdate(req.params.id, {
