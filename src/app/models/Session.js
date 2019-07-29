@@ -55,7 +55,7 @@ const SessionSchema = new mongoose.Schema({
         type: Array,
         default: [1, 3, 5, 10, 20]
     },
-      createdAt: {
+    createdAt: {
         type: Date,
         require: true,
         default: Date.now

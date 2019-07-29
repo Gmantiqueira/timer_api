@@ -2,10 +2,10 @@ const Session = require("../models/Session");
 
 class StyleController {
     async updateColor(req, res){
-        const {newColor} = req.body
+        const {baseColor} = req.body
 
         await Session.findByIdAndUpdate(req.params.id, {
-            baseColor: newColor
+            baseColor: baseColor
         })
 
         const updateColor = await Session.findById(req.params.id)
@@ -16,10 +16,10 @@ class StyleController {
     }
 
     async updateOrientation(req, res){
-        const {newOrientation} = req.body
+        const {orientation} = req.body
 
         await Session.findByIdAndUpdate(req.params.id, {
-            orientation: newOrientation
+            orientation: orientation
         })
 
         const updateOrientation = await Session.findById(req.params.id)
