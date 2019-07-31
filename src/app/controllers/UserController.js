@@ -3,47 +3,28 @@ const md5 = require('md5');
 
 class UserController {
   async createUser (req, res) {
-    const { email } = req.body
+    const { email, username } = req.body
 
     if (await User.findOne({ email })) {
-      return res.status(400).json({ error: 'User already exists' })
+      return res.status(400).json({ error: 'A User with that e-mail already exists' })
     }
 
-    const user = await User.create(req.body)
+    const hash = md5(email.toLowerCase());
+    const gravatar_url = `https://www.gravatar.com/avatar/${hash}?s=200`;
 
-    return res.json(user)
-  }
-
-  async setNickname(req, res){
-    const {email, username} = req.body
-
-    const nickname = await User.findOneAndUpdate({
-        email: email
-    }, {
-        username: username
+    const user = await User.create({
+        username: username,
+        email: email,
+        gravatar: gravatar_url
     })
 
-    return res.send(nickname)
+    return res.json(user)
   }
 
   async destroyUser(req, res) {
     await User.findByIdAndDelete(req.params.id);
 
     return res.send();
-}
-
-  async setGravatar(req, res){
-    const {email} = req.body
-
-    const hash = md5(email.toLowerCase());
-    const gravatar_url = `https://www.gravatar.com/avatar/${hash}?s=200`;
-    const gravatar = await User.findOneAndUpdate({
-        email: email
-    }, {
-        gravatar: gravatar_url
-    })
-
-    return res.send(gravatar)
   }
 
   async listUsers(req, res){
