@@ -17,6 +17,20 @@ class SessionController {
         return res.json(session);
     }
 
+    async changeSession(req, res) {
+        const { sessionName } = req.body;
+
+        await Session.findByIdAndUpdate(req.params.id, {
+            sessionName: sessionName
+        })
+
+        const updateSession = await Session.findById(req.params.id)
+
+        req.io.emit("updateSession", updateSession)
+
+        return res.json()
+    }
+
     async destroySession(req, res) {
         await Session.findByIdAndDelete(req.params.id);
 
