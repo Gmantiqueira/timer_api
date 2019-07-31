@@ -10,6 +10,7 @@ routes.get("/user", controllers.UserController.listUsers);
 routes.get("/session", controllers.SessionController.listSessions);
 routes.get("/session/:session", controllers.SessionController.getSession);
 routes.delete("/session/:id", controllers.SessionController.destroySession);
+routes.put("/session/:id/change", controllers.SessionController.changeSession);
 
 routes.post(
     "/session/:id/timerlist/:value",
