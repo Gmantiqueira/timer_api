@@ -4,7 +4,7 @@ class TimerListController {
     async addTimer(req, res) {
         const newTimer = parseInt(req.params.value);
 
-        Session.findByIdAndUpdate(
+        await Session.findByIdAndUpdate(
             req.params.id,
             { $push: { timerList: { $each: [newTimer], $sort: 1 } } },
             { safe: true, upsert: true },
@@ -23,7 +23,7 @@ class TimerListController {
     async removeTimer(req, res) {
         const timerRemoved = parseInt(req.params.value);
 
-        Session.findByIdAndUpdate(
+        await Session.findByIdAndUpdate(
             req.params.id,
             {
                 $pull: {
